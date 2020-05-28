@@ -1,0 +1,76 @@
+
+plugins {
+    id 'java'
+    id 'application'
+    id 'org.springframework.boot' version '2.1.0.RELEASE'
+    id 'idea'
+}
+
+group 'com.sample'
+version '1.0-SNAPSHOT'
+
+mainClassName = 'com.sample.cws.CarWarehouseApplication'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: '2.2.7.RELEASE'
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-actuator', version: '2.2.7.RELEASE'
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+}
+
+run {
+    args 'server', 'config/car-warehouse-service.yml'
+}
+
+sourceSets {
+    test {
+        java {
+            srcDirs = ['src/test/java']
+        }
+
+        resources {
+            srcDirs = ['config']
+        }
+    }
+
+    unitTest {
+        java {
+            srcDirs = ['src/test/java/unit']
+        }
+
+        resources {
+            srcDirs = ['config']
+        }
+    }
+
+    serviceTest {
+        java {
+            srcDirs = ['src/test/java/service']
+        }
+        resources {
+            srcDirs = ['config']
+        }
+    }
+
+}
+
+
+/*pitest {
+    //TODO: pitest yet to be added
+}
+
+dependencyCheck {
+    //TODO: dependencyCheck yet to be added
+}
+
+testCoverage {
+    // TODO: testCoverage yet to be added
+}
+
+*/
+
