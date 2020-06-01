@@ -4,7 +4,6 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/car-warehouse-service.iml" filepath="$PROJECT_DIR$/.idea/modules/car-warehouse-service.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/car-warehouse-service_main.iml" filepath="$PROJECT_DIR$/.idea/modules/car-warehouse-service_main.iml" group="car-warehouse-service" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/car-warehouse-service_serviceTest.iml" filepath="$PROJECT_DIR$/.idea/modules/car-warehouse-service_serviceTest.iml" group="car-warehouse-service" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/car-warehouse-service_test.iml" filepath="$PROJECT_DIR$/.idea/modules/car-warehouse-service_test.iml" group="car-warehouse-service" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/car-warehouse-service_unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/car-warehouse-service_unitTest.iml" group="car-warehouse-service" />
     </modules>

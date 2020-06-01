@@ -20,7 +20,13 @@ repositories {
 dependencies {
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: '2.2.7.RELEASE'
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-actuator', version: '2.2.7.RELEASE'
+
     testCompile group: 'junit', name: 'junit', version: '4.12'
+    testCompile group: 'org.mockito', name: 'mockito-core', version: '3.3.3'
+    testCompile group: 'org.mock-server', name: 'mockserver-netty', version: '5.5.0'
+    testCompile group: 'org.mock-server', name: 'mockserver-client-java', version: '5.5.0'
+    testCompile group: 'org.springframework.boot', name: 'spring-boot-starter-test', version: '2.2.7.RELEASE'
+
 }
 
 run {
@@ -40,7 +46,7 @@ sourceSets {
 
     unitTest {
         java {
-            srcDirs = ['src/test/java/unit']
+            srcDirs = ['src/test/java']
         }
 
         resources {
@@ -48,14 +54,6 @@ sourceSets {
         }
     }
 
-    serviceTest {
-        java {
-            srcDirs = ['src/test/java/service']
-        }
-        resources {
-            srcDirs = ['config']
-        }
-    }
 
 }
 

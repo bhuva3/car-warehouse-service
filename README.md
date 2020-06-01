@@ -2,6 +2,9 @@
 
 This service developed using SpringBoot 2 framework, Main purpose of this service is to cater backend functionality for car warehouse users 
 
+    This service running on port 50010, below are endpoints
+    
+    GET /getVehicleDetailList
 
 ### Prerequisites to run service
 
@@ -48,7 +51,7 @@ gradlew clean build bootRun
 
 To run unit test, use below mentioned command
 ```
-gradlew unitTest
+gradlew test
 ```
 
 ### Run pitest
@@ -56,13 +59,6 @@ gradlew unitTest
 To run pitest, use below mentioned command
 ```
 gradlew pitest
-```
-
-### Run functional test
-
-To run Service test, use below mentioned command
-```
-gradlew serviceTest
 ```
 
 ### Test coverage
