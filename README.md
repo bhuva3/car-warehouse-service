@@ -5,6 +5,7 @@ This service developed using SpringBoot 2 framework, Main purpose of this servic
     This service running on port 50010, below are endpoints
     
     GET /getVehicleDetailList
+    GET /getVehicleDetails/{id}
 
 ### Prerequisites to run service
 
@@ -56,14 +57,14 @@ gradlew test
 
 ### Run pitest
 
-To run pitest, use below mentioned command
+To run pitest, use below mentioned command (TBA)
 ```
 gradlew pitest
 ```
 
 ### Test coverage
 
-To run test coverage, run below command
+To run test coverage, run below command (TBA)
 
 ```
 gradlew testCoverage
@@ -71,7 +72,7 @@ gradlew testCoverage
 
 ### Build vulnerability check
 
-To make sure library we used in service not containing any vulnerability. Please run below task
+To make sure library we used in service not containing any vulnerability. Please run below task (TBA)
 
 ```
 gradlew dependencyCheck

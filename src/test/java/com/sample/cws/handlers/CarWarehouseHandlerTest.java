@@ -24,8 +24,40 @@ public class CarWarehouseHandlerTest {
     }
 
     @Test
-    public void shouldReturnCorrectExtractedList(){
+    public void shouldReturnCorrectExtractedVehicleList(){
 
+        List<Warehouse> warehouseList = getMockedWarehouseList();
+
+        List<Vehicle> resultVehicleList = carWarehouseHandler.extractVehicleList(warehouseList);
+
+        Assert.assertNotNull(resultVehicleList);
+        Assert.assertEquals(resultVehicleList.size(), 6);
+        Assert.assertEquals(resultVehicleList.get(0).getId(), 2);
+    }
+
+    @Test
+    public void shouldReturnCorrectExtractedWarehouseDetails(){
+
+        List<Warehouse> warehouseList = getMockedWarehouseList();
+
+        Warehouse warehouse = carWarehouseHandler.extractVehicleDetails(1L, warehouseList);
+
+        Assert.assertNotNull(warehouse);
+        Assert.assertEquals(warehouse.getId(), 1);
+    }
+
+    @Test
+    public void shouldReturnNullWhenVehicleIdNotExist(){
+
+        List<Warehouse> warehouseList = getMockedWarehouseList();
+
+        Warehouse warehouse = carWarehouseHandler.extractVehicleDetails(110L, warehouseList);
+
+        Assert.assertNull(warehouse);
+
+    }
+
+    private List<Warehouse> getMockedWarehouseList() {
         List<Vehicle> vehicleList = new ArrayList<>();
         vehicleList.add(new Vehicle(1, "make1", "model1", 2019, 12.122, true, "2020-02-17", LocalDate.now().plusDays(1)));
         vehicleList.add(new Vehicle(2, "make2", "model2", 2019, 12.55, true, "2020-02-16", LocalDate.now()));
@@ -34,11 +66,6 @@ public class CarWarehouseHandlerTest {
 
         warehouseList.add(new Warehouse(1, "warehouse1", new Car("Glasgow", vehicleList), null));
         warehouseList.add(new Warehouse(2, "warehouse2", new Car("Glasgow", vehicleList), null));
-
-        List<Vehicle> resultVehicleList = carWarehouseHandler.extractVehicleList(warehouseList);
-
-        Assert.assertNotNull(resultVehicleList);
-        Assert.assertEquals(resultVehicleList.size(), 6);
-        Assert.assertEquals(resultVehicleList.get(0).getId(), 2);
+        return warehouseList;
     }
 }

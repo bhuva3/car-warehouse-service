@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.time.LocalDate;
 
-public class Vehicle extends Car{
+public class Vehicle{
 
     @JsonProperty("_id")
     private long id;

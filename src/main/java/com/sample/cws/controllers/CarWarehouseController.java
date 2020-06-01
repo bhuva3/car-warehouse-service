@@ -11,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -46,6 +47,31 @@ public class CarWarehouseController {
         }
 
         response = new ResponseEntity(vehicleList, HttpStatus.OK);
+
+        return response;
+    }
+
+    @ResponseBody
+    @GetMapping(value = "/getVehicleDetails/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity getVehicleDetails(@PathVariable (value = "id") long vehicleId) {
+        LOGGER.info("Invoking getVehicleDetails() for vehicleId: [{}]", vehicleId);
+        ResponseEntity response;
+        Warehouse warehouse;
+
+        try {
+            List<Warehouse> warehouseList = JsonParser.getWarehouseData();
+            warehouse = carWarehouseHandler.extractVehicleDetails(vehicleId, warehouseList);
+
+        } catch (IOException e) {
+            LOGGER.error("Exception occurred while parsing json file [{}]", e);
+            return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
+        if(warehouse !=null){
+            response = new ResponseEntity(warehouse, HttpStatus.OK);
+        } else {
+            response = new ResponseEntity(HttpStatus.BAD_REQUEST);
+        }
 
         return response;
     }

@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 
 public class Car {
@@ -61,5 +62,15 @@ public class Car {
         int result = carLocation.hashCode();
         result = 31 * result + (vehicles != null ? vehicles.hashCode() : 0);
         return result;
+    }
+
+    public boolean isVehicleExist(long vehicleId){
+        Optional<Vehicle> vehicleOptional = getVehicles().stream().filter(v -> v.getId() == vehicleId).findFirst();
+        return vehicleOptional.isPresent();
+    }
+
+    public Vehicle getVehicleById(long vehicleId) {
+        Optional<Vehicle> vehicleOptional = getVehicles().stream().filter(v -> v.getId() == vehicleId).findFirst();
+        return vehicleOptional.get();
     }
 }
