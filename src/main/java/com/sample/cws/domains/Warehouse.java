@@ -2,11 +2,14 @@ package com.sample.cws.domains;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
 
 
 public class Warehouse {
 
     @JsonProperty("_id")
+    @Field("_id")
     private long id;
 
     private String name;
@@ -14,6 +17,7 @@ public class Warehouse {
     private Car cars;
 
     @JsonProperty("location")
+    @Field("location")
     private WarehouseLocation warehouseLocation;
 
     public Warehouse() {

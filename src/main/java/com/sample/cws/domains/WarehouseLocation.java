@@ -1,12 +1,14 @@
 package com.sample.cws.domains;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.springframework.data.mongodb.core.mapping.Field;
 
 public class WarehouseLocation {
 
     private String lat;
 
     @JsonProperty("long")
+    @Field("long")
     private String longitude;
 
     public WarehouseLocation() {

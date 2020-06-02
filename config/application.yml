@@ -14,3 +14,8 @@ management:
     health:
       show-details: always
 
+
+spring:
+    data:
+      mongodb:
+        uri: mongodb://warehousedbuser:password@127.0.0.1:27017/WarehouseDatastore?authSource=admin

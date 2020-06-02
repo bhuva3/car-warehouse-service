@@ -7,6 +7,19 @@ This service developed using SpringBoot 2 framework, Main purpose of this servic
     GET /getVehicleDetailList
     GET /getVehicleDetails/{id}
 
+Create required user in mongoDB admin datastore, also created datastore with name WarehouseDatastore
+
+    use admin
+    db.createUser(
+    {
+        user: "warehousedbuser",
+        pwd: "password",
+        roles: [ "readWrite", "dbAdmin" ]
+    }
+    )
+    
+
+
 ### Prerequisites to run service
 
 Need below listed software/package installed on machine to run this service

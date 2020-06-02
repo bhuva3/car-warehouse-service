@@ -1,12 +1,14 @@
 package com.sample.cws.domains;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.springframework.data.mongodb.core.mapping.Field;
 
 import java.time.LocalDate;
 
 public class Vehicle{
 
     @JsonProperty("_id")
+    @Field("_id")
     private long id;
 
     private String make;
@@ -14,6 +16,7 @@ public class Vehicle{
     private String model;
 
     @JsonProperty("year_model")
+    @Field("year_model")
     private int yearModel;
 
     private double price;
@@ -21,6 +24,7 @@ public class Vehicle{
     private boolean licensed;
 
     @JsonProperty("date_added")
+    @Field("date_added")
     private String strDateAdded;
 
     private LocalDate dateAdded;

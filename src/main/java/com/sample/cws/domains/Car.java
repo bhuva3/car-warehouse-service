@@ -1,15 +1,16 @@
 package com.sample.cws.domains;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.springframework.data.mongodb.core.mapping.Field;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-
 public class Car {
 
     @JsonProperty("location")
+    @Field("location")
     private String carLocation;
 
     private List<Vehicle> vehicles = new ArrayList<>();

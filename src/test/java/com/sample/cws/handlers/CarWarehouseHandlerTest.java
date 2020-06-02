@@ -1,34 +1,40 @@
 package com.sample.cws.handlers;
 
+import com.sample.cws.Repositories.CarWarehouseRepository;
 import com.sample.cws.domains.Car;
 import com.sample.cws.domains.Vehicle;
 import com.sample.cws.domains.Warehouse;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.springframework.boot.test.context.SpringBootTest;
+
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-@RunWith(MockitoJUnitRunner.class)
+import static org.mockito.Mockito.when;
+
+@RunWith(SpringJUnit4ClassRunner.class)
 public class CarWarehouseHandlerTest {
 
+
+    @Mock
+    CarWarehouseRepository carWarehouseRepository;
+
+
+    @InjectMocks
     CarWarehouseHandler carWarehouseHandler;
 
-    @Before
-    public void setUp(){
-        carWarehouseHandler = new CarWarehouseHandler();
-    }
 
     @Test
     public void shouldReturnCorrectExtractedVehicleList(){
-
-        List<Warehouse> warehouseList = getMockedWarehouseList();
-
-        List<Vehicle> resultVehicleList = carWarehouseHandler.extractVehicleList(warehouseList);
+        when(carWarehouseRepository.getAllVehicleDetails()).thenReturn(getMockedWarehouseList());
+        List<Vehicle> resultVehicleList = carWarehouseHandler.getVehicleList();
 
         Assert.assertNotNull(resultVehicleList);
         Assert.assertEquals(resultVehicleList.size(), 6);
@@ -38,9 +44,9 @@ public class CarWarehouseHandlerTest {
     @Test
     public void shouldReturnCorrectExtractedWarehouseDetails(){
 
-        List<Warehouse> warehouseList = getMockedWarehouseList();
-
-        Warehouse warehouse = carWarehouseHandler.extractVehicleDetails(1L, warehouseList);
+        List<Warehouse> mockedWarehouseList = getMockedWarehouseList();
+        when(carWarehouseRepository.findByVehicleId(1L)).thenReturn(mockedWarehouseList.get(0));
+        Warehouse warehouse = carWarehouseHandler.getVehicleDetails(1L);
 
         Assert.assertNotNull(warehouse);
         Assert.assertEquals(warehouse.getId(), 1);
@@ -49,11 +55,18 @@ public class CarWarehouseHandlerTest {
     @Test
     public void shouldReturnNullWhenVehicleIdNotExist(){
 
-        List<Warehouse> warehouseList = getMockedWarehouseList();
-
-        Warehouse warehouse = carWarehouseHandler.extractVehicleDetails(110L, warehouseList);
-
+        when(carWarehouseRepository.findByVehicleId(110L)).thenReturn(null);
+        Warehouse warehouse = carWarehouseHandler.getVehicleDetails(110L);
         Assert.assertNull(warehouse);
+
+    }
+
+    @Test
+    public void shouldReturnEmptyListWhenNoVehicleExist(){
+
+        when(carWarehouseRepository.getAllVehicleDetails()).thenReturn(new ArrayList<>());
+        List<Vehicle> vehicleList= carWarehouseHandler.getVehicleList();
+        Assert.assertEquals(vehicleList.size(), 0);
 
     }
 

@@ -3,7 +3,6 @@ package com.sample.cws.controllers;
 import com.sample.cws.domains.Vehicle;
 import com.sample.cws.domains.Warehouse;
 import com.sample.cws.handlers.CarWarehouseHandler;
-import com.sample.cws.utils.JsonParser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +14,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -39,9 +37,8 @@ public class CarWarehouseController {
         List<Vehicle> vehicleList;
 
         try {
-            List<Warehouse> warehouseList = JsonParser.getWarehouseData();
-            vehicleList = carWarehouseHandler.extractVehicleList(warehouseList);
-        } catch (IOException e) {
+            vehicleList = carWarehouseHandler.getVehicleList();
+        } catch (Exception e) {
             LOGGER.error("Exception occurred while parsing json file [{}]", e);
             return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
         }
@@ -51,6 +48,11 @@ public class CarWarehouseController {
         return response;
     }
 
+    /**
+     * This API to get VehicleDetails by vehicleId
+     * @param vehicleId
+     * @return warehouse
+     */
     @ResponseBody
     @GetMapping(value = "/getVehicleDetails/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity getVehicleDetails(@PathVariable (value = "id") long vehicleId) {
@@ -59,10 +61,8 @@ public class CarWarehouseController {
         Warehouse warehouse;
 
         try {
-            List<Warehouse> warehouseList = JsonParser.getWarehouseData();
-            warehouse = carWarehouseHandler.extractVehicleDetails(vehicleId, warehouseList);
-
-        } catch (IOException e) {
+            warehouse = carWarehouseHandler.getVehicleDetails(vehicleId);
+        } catch (Exception e) {
             LOGGER.error("Exception occurred while parsing json file [{}]", e);
             return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
         }
